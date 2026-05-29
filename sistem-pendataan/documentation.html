@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation | Sistem Pendataan Kampus</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/shell.css">
+  <link rel="stylesheet" href="assets/css/topbar-extra.css">
+</head>
+<body>
+  <div class="app-wrapper" data-page="documentation"></div>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/topbar.js" defer></script>
+  <div id="page-content" hidden>
+    <div class="page-head">
+      <h1>Documentation</h1>
+      <nav><ol class="breadcrumb mb-0"><li class="breadcrumb-item"><a href="index.html">Home</a></li><li class="breadcrumb-item active">Documentation</li></ol></nav>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-3">
+        <div class="card-box p-0">
+          <div class="card-box-head px-3 py-2 border-bottom">Daftar Isi</div>
+          <nav class="doc-toc py-1">
+            <a href="#intro" class="active">1. Pendahuluan</a>
+            <a href="#mulai">2. Memulai</a>
+            <a href="#mahasiswa">3. Modul Mahasiswa</a>
+            <a href="#dosen">4. Modul Dosen</a>
+            <a href="#fitur">5. Pencarian, Komentar, Notifikasi</a>
+            <a href="#preview">6. Live Preview</a>
+            <a href="#shortcut">7. Shortcut</a>
+            <a href="#faq">8. FAQ</a>
+          </nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="card-box doc-body">
+          <h2 id="intro">1. Pendahuluan</h2>
+          <p><strong>Sistem Pendataan Kampus</strong> adalah aplikasi web untuk mengelola data mahasiswa, dosen, dan aktivitas akademik. Dibangun dengan HTML, Bootstrap 5, dan JavaScript murni — tanpa backend, sehingga mudah dijalankan langsung dari browser.</p>
+
+          <h2 id="mulai">2. Memulai</h2>
+          <p>Buka <code>index.html</code> di browser modern (Chrome, Edge, Firefox). Tidak perlu instalasi. Semua data demo disimpan di <code>localStorage</code> browser Anda.</p>
+          <pre>sistem-pendataan/
+├── index.html
+├── input-mahasiswa.html
+├── input-dosen.html
+├── data-mahasiswa.html
+├── data-dosen.html
+├── live-preview.html
+├── documentation.html
+└── assets/
+    ├── css/  (style.css, shell.css, topbar-extra.css)
+    ├── js/   (script.js, shell.js, topbar.js, data-mahasiswa.js)
+    └── img/  (profil.jpeg)</pre>
+
+          <h2 id="mahasiswa">3. Modul Mahasiswa</h2>
+          <h3>3.1 Input Mahasiswa</h3>
+          <p>Buka menu <em>Form Input → Input Mahasiswa</em>. Lengkapi NIM, nama, program studi, angkatan, dan kontak. Klik <strong>Simpan</strong>; data baru ditambahkan ke localStorage dengan progress 0% dan status aktif.</p>
+          <h3>3.2 Data Mahasiswa</h3>
+          <p>Tabel mahasiswa mendukung <strong>pencarian</strong> (nama/NIM), <strong>paginasi</strong>, indikator progress studi, serta aksi edit dan hapus.</p>
+
+          <h2 id="dosen">4. Modul Dosen</h2>
+          <h3>4.1 Input Dosen</h3>
+          <p>Lengkapi nama, username, kota, provinsi, dan kode pos. Centang persetujuan lalu klik <strong>Submit form</strong>.</p>
+          <h3>4.2 Data Dosen</h3>
+          <p>Daftar dosen lengkap dengan NIDN, prodi, jabatan akademik, dan status. Tersedia pencarian dan tombol <strong>Export CSV</strong>.</p>
+
+          <h2 id="fitur">5. Pencarian, Komentar, Notifikasi</h2>
+          <h3>5.1 Pencarian global</h3>
+          <p>Klik ikon <i class="fa-solid fa-magnifying-glass"></i> di topbar (atau tekan <code>/</code>). Ketik untuk mencari halaman, mahasiswa, atau dosen dari satu titik.</p>
+          <h3>5.2 Komentar</h3>
+          <p>Klik ikon <i class="fa-regular fa-comment"></i>. Komentar tersimpan di localStorage dan dapat dibalas dari mana saja di sistem.</p>
+          <h3>5.3 Notifikasi</h3>
+          <p>Klik ikon <i class="fa-regular fa-bell"></i>. Setiap item dapat ditandai <em>sudah dibaca</em>, atau gunakan tombol <strong>Tandai semua dibaca</strong>.</p>
+
+          <h2 id="preview">6. Live Preview</h2>
+          <p>Halaman <em>Live Preview</em> menampilkan modul lain di dalam iframe. Pilih halaman dari dropdown dan ubah ukuran (Desktop / Tablet / Mobile) untuk uji responsif tanpa berpindah halaman.</p>
+
+          <h2 id="shortcut">7. Shortcut Keyboard</h2>
+          <ul>
+            <li><code>/</code> — fokus pencarian global</li>
+            <li><code>Esc</code> — tutup panel aktif</li>
+          </ul>
+
+          <h2 id="faq">8. FAQ</h2>
+          <h3>Apakah data tersimpan permanen?</h3>
+          <p>Data demo tersimpan di <code>localStorage</code> browser. Untuk persistensi penuh, hubungkan ke backend (mis. Supabase) — sistem ini siap diintegrasikan.</p>
+          <h3>Bagaimana mengganti foto profil?</h3>
+          <p>Ganti file <code>assets/img/profil.jpeg</code> dengan foto baru (ukuran kotak direkomendasikan).</p>
+
+          <p class="text-muted mt-4 small">Versi dokumen 1.0.2 · diperbarui Mei 2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('shell:ready', ()=>{
+      const links = document.querySelectorAll('.doc-toc a');
+      links.forEach(a => a.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth', block:'start'});
+        links.forEach(x=>x.classList.remove('active')); a.classList.add('active');
+      }));
+    });
+  </script>
+</body>
+</html>
