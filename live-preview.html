@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Preview | Sistem Pendataan Kampus</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/shell.css">
+  <link rel="stylesheet" href="assets/css/topbar-extra.css">
+</head>
+<body>
+  <div class="app-wrapper" data-page="live-preview"></div>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/topbar.js" defer></script>
+  <div id="page-content" hidden>
+    <div class="page-head">
+      <h1>Live Preview</h1>
+      <nav><ol class="breadcrumb mb-0"><li class="breadcrumb-item"><a href="index.html">Home</a></li><li class="breadcrumb-item active">Live Preview</li></ol></nav>
+    </div>
+
+    <div class="card-box p-0 mb-3">
+      <div class="card-box-head px-3 py-2 d-flex align-items-center border-bottom">
+        <span>Pilih halaman untuk dipreview</span>
+        <div class="ms-auto d-flex gap-2 align-items-center">
+          <select id="pvPick" class="form-select form-select-sm" style="width:220px">
+            <option value="index.html">Dashboard</option>
+            <option value="input-mahasiswa.html">Input Mahasiswa</option>
+            <option value="input-dosen.html">Input Dosen</option>
+            <option value="data-mahasiswa.html">Data Mahasiswa</option>
+            <option value="data-dosen.html">Data Dosen</option>
+            <option value="documentation.html">Documentation</option>
+          </select>
+          <div class="btn-group btn-group-sm" role="group" id="pvSize">
+            <button class="btn btn-outline-secondary active" data-w="100%"  title="Desktop"><i class="fa-solid fa-desktop"></i></button>
+            <button class="btn btn-outline-secondary"        data-w="820px" title="Tablet"><i class="fa-solid fa-tablet-screen-button"></i></button>
+            <button class="btn btn-outline-secondary"        data-w="390px" title="Mobile"><i class="fa-solid fa-mobile-screen"></i></button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary" id="pvReload" title="Reload"><i class="fa-solid fa-arrows-rotate"></i></button>
+          <a class="btn btn-sm btn-cyan" id="pvOpen" target="_blank" href="index.html"><i class="fa-solid fa-up-right-from-square me-1"></i>Buka tab baru</a>
+        </div>
+      </div>
+      <div class="p-3 d-flex justify-content-center" style="background:#e9edf2">
+        <div class="preview-card" id="pvWrap" style="width:100%; max-width:100%">
+          <div class="preview-card-head">
+            <span class="dot"></span><span class="dot y"></span><span class="dot g"></span>
+            <span id="pvUrl">/index.html</span>
+          </div>
+          <iframe id="pvFrame" class="preview-frame" src="index.html"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card-box">
+          <div class="card-box-head">Tentang Live Preview</div>
+          <p class="mb-2" style="font-size:13.5px">Halaman ini menampilkan modul-modul sistem dalam <strong>iframe</strong> sehingga Anda bisa mencoba form dan navigasi tanpa berpindah halaman.</p>
+          <ul class="mb-0" style="font-size:13.5px">
+            <li>Ganti halaman lewat dropdown.</li>
+            <li>Ubah ukuran untuk uji responsif (desktop/tablet/mobile).</li>
+            <li>Klik <em>Buka tab baru</em> untuk preview penuh.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-box">
+          <div class="card-box-head">Status Modul</div>
+          <ul class="list-unstyled mb-0" style="font-size:13.5px">
+            <li class="d-flex justify-content-between border-bottom py-1"><span>Dashboard</span><span class="pill bg-success">live</span></li>
+            <li class="d-flex justify-content-between border-bottom py-1"><span>Input Mahasiswa</span><span class="pill bg-success">live</span></li>
+            <li class="d-flex justify-content-between border-bottom py-1"><span>Input Dosen</span><span class="pill bg-success">live</span></li>
+            <li class="d-flex justify-content-between border-bottom py-1"><span>Data Mahasiswa</span><span class="pill bg-success">live</span></li>
+            <li class="d-flex justify-content-between border-bottom py-1"><span>Data Dosen</span><span class="pill bg-success">live</span></li>
+            <li class="d-flex justify-content-between py-1"><span>Documentation</span><span class="pill bg-success">live</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('shell:ready', ()=>{
+      const f = document.getElementById('pvFrame');
+      const url = document.getElementById('pvUrl');
+      const wrap = document.getElementById('pvWrap');
+      const open = document.getElementById('pvOpen');
+      document.getElementById('pvPick').addEventListener('change', e=>{
+        f.src = e.target.value; url.textContent = '/'+e.target.value; open.href = e.target.value;
+      });
+      document.getElementById('pvReload').addEventListener('click', ()=> f.src = f.src);
+      document.querySelectorAll('#pvSize button').forEach(b=>{
+        b.addEventListener('click', ()=>{
+          document.querySelectorAll('#pvSize button').forEach(x=>x.classList.remove('active'));
+          b.classList.add('active');
+          wrap.style.maxWidth = b.dataset.w;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

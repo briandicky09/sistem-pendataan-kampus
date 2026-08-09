@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input Mahasiswa | Sistem Pendataan Kampus</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/shell.css">
+  <link rel="stylesheet" href="assets/css/topbar-extra.css">
+</head>
+<body>
+  <div class="app-wrapper" data-page="input-mahasiswa"></div>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/topbar.js" defer></script>
+  <div id="page-content" hidden>
+    <div class="page-head">
+      <h1>Input Mahasiswa</h1>
+      <nav><ol class="breadcrumb mb-0"><li class="breadcrumb-item"><a href="index.html">Home</a></li><li class="breadcrumb-item active">Input Mahasiswa</li></ol></nav>
+    </div>
+    <div class="card-box p-0">
+      <div class="card-box-head px-3 py-2 border-bottom">Formulir Data Mahasiswa</div>
+      <form class="p-3 p-md-4" id="formMhs" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" name="nama" placeholder="cth: Rizky Maulana Pratama" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">NIM</label>
+            <input type="text" class="form-control" name="nim" placeholder="cth: 19081123" pattern="[0-9]{6,12}" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Program Studi</label>
+            <select class="form-select" name="prodi" required>
+              <option value="">Pilih program studi...</option>
+              <option>Teknik Informatika</option>
+              <option>Sistem Informasi</option>
+              <option>Teknik Komputer</option>
+              <option>Manajemen Informatika</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Angkatan</label>
+            <input type="number" class="form-control" name="angkatan" min="2000" max="2099" placeholder="2024" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Jenis Kelamin</label>
+            <select class="form-select" name="jk" required>
+              <option value="">Pilih...</option><option>Laki-laki</option><option>Perempuan</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email Kampus</label>
+            <input type="email" class="form-control" name="email" placeholder="nama@kampus.ac.id" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">No. HP / WhatsApp</label>
+            <input type="tel" class="form-control" name="hp" placeholder="08xxxxxxxx" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Alamat</label>
+            <textarea class="form-control" name="alamat" rows="2" placeholder="Alamat lengkap"></textarea>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="setujuMhs" required>
+              <label class="form-check-label" for="setujuMhs">Data yang saya isi sudah benar dan dapat dipertanggungjawabkan.</label>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 border-top pt-3">
+          <button type="submit" class="btn btn-cyan"><i class="fa-solid fa-paper-plane me-1"></i> Simpan</button>
+          <button type="reset" class="btn btn-light border">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('shell:ready', () => {
+      const f = document.getElementById('formMhs');
+      f.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        if(!f.checkValidity()){ f.classList.add('was-validated'); spToast('Mohon lengkapi data','error'); return; }
+        const d = Object.fromEntries(new FormData(f).entries());
+        const list = JSON.parse(localStorage.getItem('sp_mhs')||'[]');
+        list.push({...d, progress:0, status:'aktif'});
+        localStorage.setItem('sp_mhs', JSON.stringify(list));
+        spToast('Mahasiswa "'+d.nama+'" tersimpan','success');
+        f.reset(); f.classList.remove('was-validated');
+      });
+    });
+  </script>
+</body>
+</html>
